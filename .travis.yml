@@ -3,18 +3,18 @@ services:
   - docker
 
 before_install:
-  -docker build -t peterslavov/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t peterslavov/react-test -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true peterslavov/react-test npm test
 
 after_success:
-  -docker build -t peterslavov/multi-client ./client
-  -docker build -t peterslavov/multi-nginx ./nginx
-  -docker build -t peterslavov/multi-server ./server
-  -docker build -t peterslavov/multi-worker ./worker
+  - docker build -t peterslavov/multi-client ./client
+  - docker build -t peterslavov/multi-nginx ./nginx
+  - docker build -t peterslavov/multi-server ./server
+  - docker build -t peterslavov/multi-worker ./worker
   # Push to docker hub
-  -echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stin
   - docker push peterslavov/multi-client
   - docker push peterslavov/multi-nginx
   - docker push peterslavov/multi-server
