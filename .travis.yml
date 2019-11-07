@@ -14,7 +14,7 @@ after_success:
   - docker build -t pslavov/multi-server ./server
   - docker build -t pslavov/multi-worker ./worker
   # Push to docker hub
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push pslavov/multi-client
   - docker push pslavov/multi-nginx
   - docker push pslavov/multi-server
